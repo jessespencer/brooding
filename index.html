@@ -14,15 +14,26 @@
             justify-content: center;
             align-items: center;
         }
-        img {
-            max-width: 350px; /* your requested max width */
-            width: 100%; /* scales down on small screens */
+        canvas {
+            max-width: 350px;
+            width: 100%;
             height: auto;
             display: block;
         }
     </style>
+    <!-- Rive Runtime -->
+    <script src="https://unpkg.com/@rive-app/canvas@2.11.4/rive.min.js"></script>
 </head>
 <body>
-    <img src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" />
+    <!-- Rive animation canvas -->
+    <canvas id="rive-canvas" width="350" height="350"></canvas>
+
+    <script>
+        const rive = new Rive({
+            src: "animations/hopster-animate-v1.riv", // adjust path if needed
+            canvas: document.getElementById("rive-canvas"),
+            autoplay: true
+        });
+    </script>
 </body>
 </html>
