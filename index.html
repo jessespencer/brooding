@@ -14,42 +14,16 @@
             justify-content: center;
             align-items: center;
         }
-        canvas {
-            max-width: 350px;
-            width: 100%;
-            height: auto;
-            display: block;
-        }
     </style>
-    <!-- FIXED: Rive runtime that exposes global Rive -->
-    <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.11.4/rive.min.js"></script>
+    <!-- Rive Web Player -->
+    <script src="https://unpkg.com/@rive-app/web-component@1.0.101/dist/rive.js"></script>
 </head>
 <body>
-    <!-- Your canvas -->
-    <canvas id="rive-canvas" width="350" height="350"></canvas>
-
-    <script>
-        // Create Rive instance
-        const riveInstance = new Rive({
-            src: "animations/hopster-animate-v1.riv",
-            canvas: document.getElementById("rive-canvas"),
-            autoplay: true,
-            stateMachines: [ "HopsterMachine" ],
-            onLoad: () => {
-                // Grab the EyesOpen trigger input
-                const eyesOpenInput = riveInstance.inputs("HopsterMachine").find(input => input.name === "EyesOpen");
-
-                console.log("EyesOpen input:", eyesOpenInput);
-
-                // Add hover listener
-                const canvas = document.getElementById("rive-canvas");
-
-                canvas.addEventListener("mouseenter", () => {
-                    console.log("Hovering! Firing EyesOpen trigger.");
-                    eyesOpenInput.fire();
-                });
-            }
-        });
-    </script>
+    <!-- SUPER SIMPLE RIVE PLAYER -->
+    <rive-player 
+        src="animations/hopster-animate-v1.riv"
+        autoplay
+        style="width: 350px; height: 350px;"
+    ></rive-player>
 </body>
 </html>
