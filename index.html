@@ -21,18 +21,34 @@
             display: block;
         }
     </style>
-    <!-- Rive Runtime -->
-    <script src="https://unpkg.com/@rive-app/canvas@2.11.4/rive.min.js"></script>
+    <!-- FIXED: Rive runtime that exposes global Rive -->
+    <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.11.4/rive.min.js"></script>
 </head>
 <body>
-    <!-- Rive animation canvas -->
+    <!-- Your canvas -->
     <canvas id="rive-canvas" width="350" height="350"></canvas>
 
     <script>
-        const rive = new Rive({
-            src: "animations/hopster-animate-v1.riv", // adjust path if needed
+        // Create Rive instance
+        const riveInstance = new Rive({
+            src: "animations/hopster-animate-v1.riv",
             canvas: document.getElementById("rive-canvas"),
-            autoplay: true
+            autoplay: true,
+            stateMachines: [ "HopsterMachine" ],
+            onLoad: () => {
+                // Grab the EyesOpen trigger input
+                const eyesOpenInput = riveInstance.inputs("HopsterMachine").find(input => input.name === "EyesOpen");
+
+                console.log("EyesOpen input:", eyesOpenInput);
+
+                // Add hover listener
+                const canvas = document.getElementById("rive-canvas");
+
+                canvas.addEventListener("mouseenter", () => {
+                    console.log("Hovering! Firing EyesOpen trigger.");
+                    eyesOpenInput.fire();
+                });
+            }
         });
     </script>
 </body>
