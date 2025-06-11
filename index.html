@@ -1,6 +1,6 @@
 <!--
   The Brooding Hopster
-  © 2015–2025 Jesse Spencer. All rights reserved.
+  © 2025 Jesse Spencer. All rights reserved.
   Do not reproduce or use brand assets without permission.
   thebroodinghopster.com
 -->
@@ -20,7 +20,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #F6BB7E; /* Brooding Hopster background */
+      background-color: #F6BB7E;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -28,7 +28,7 @@
       position: relative;
     }
 
-    img {
+    canvas {
       max-width: 350px;
       width: 100%;
       height: auto;
@@ -51,10 +51,67 @@
 </head>
 
 <body>
-  <img src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" />
+  <!-- Rive canvas lives here -->
+  <canvas id="rive-canvas"></canvas>
+
+  <!-- Optional fallback image if animation doesn’t load -->
+  <!-- <img src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" /> -->
 
   <footer class="site-footer">
     © 2025 Jesse Spencer
   </footer>
+
+  <!-- Rive Runtime -->
+  <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+
+  <!-- Rive Init Script -->
+  <script>
+    const canvas = document.getElementById("rive-canvas");
+
+    const dpr = window.devicePixelRatio || 1;
+    const width = 350;
+    const height = 500;
+
+    // Set canvas resolution for high-DPI screens
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    // Initialize Rive with state machine and stable hover behavior
+    const riveInstance = new rive.Rive({
+      src: "assets/hopster-v2.riv",
+      canvas: canvas,
+      autoplay: true,
+      stateMachines: ['HopsterMachine'],
+      onLoad: () => {
+        const inputs = riveInstance.stateMachineInputs('HopsterMachine');
+        const eyesOpenInput = inputs.find(i => i.name === 'EyesOpen');
+
+        let eyesAreOpen = false;
+
+        // Start with eyes closed
+        if (eyesOpenInput && 'value' in eyesOpenInput) {
+          eyesOpenInput.value = false;
+        }
+
+        // Hover to open eyes (only once while inside)
+        canvas.addEventListener('mouseenter', () => {
+          if (eyesOpenInput && 'value' in eyesOpenInput && !eyesAreOpen) {
+            eyesOpenInput.value = true;
+            eyesAreOpen = true;
+          }
+        });
+
+        // Mouse out to close eyes
+        canvas.addEventListener('mouseleave', () => {
+          if (eyesOpenInput && 'value' in eyesOpenInput && eyesAreOpen) {
+            eyesOpenInput.value = false;
+            eyesAreOpen = false;
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
