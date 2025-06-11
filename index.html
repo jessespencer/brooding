@@ -1,28 +1,60 @@
+<!--
+  The Brooding Hopster
+  © 2015–2025 Jesse Spencer. All rights reserved.
+  Do not reproduce or use brand assets without permission.
+  thebroodinghopster.com
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>The Brooding Hopster</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #F6BB7E;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        img {
-            max-width: 350px; /* your requested max width */
-            width: 100%; /* scales down on small screens */
-            height: auto;
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Brooding Hopster</title>
+
+  <!-- Adobe Fonts: New Spirit SemiBold -->
+  <link rel="stylesheet" href="https://use.typekit.net/wun4jdi.css" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #F6BB7E; /* Brooding Hopster background */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    img {
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .site-footer {
+      font-family: "new-spirit", serif;
+      font-weight: 600;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.85rem;
+      color: #C65F28;
+      pointer-events: none;
+    }
+  </style>
 </head>
+
 <body>
-    <img src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" />
+  <img src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" />
+
+  <footer class="site-footer">
+    © 2025 Jesse Spencer
+  </footer>
 </body>
 </html>
