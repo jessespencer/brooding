@@ -1,0 +1,95 @@
+<!--
+  The Brooding Hopster
+  © 2026 Anchor & Arrows, LLC. All rights reserved.
+  Do not reproduce or use brand assets without permission.
+  thebroodinghopster.com
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light dark" />
+  <title>404 — The Brooding Hopster</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Adobe Fonts: New Spirit SemiBold -->
+  <link rel="stylesheet" href="https://use.typekit.net/wun4jdi.css" />
+
+  <style>
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #F6BB7E;
+    }
+
+    html.dark {
+      background-color: #1F2938;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "new-spirit", serif;
+      font-weight: 600;
+      color: #7E3D1D;
+      text-align: center;
+    }
+
+    html.dark body {
+      color: #D1A880;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0 0 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin: 0 0 2rem;
+    }
+
+    a {
+      color: #9B4B1C;
+      text-decoration: none;
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 2px;
+    }
+
+    html.dark a {
+      color: #4DB882;
+    }
+  </style>
+
+  <script>
+    (function() {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <h1>404</h1>
+  <p>Nothing to brood over here.</p>
+  <a href="/">Back to the Hopster</a>
+</body>
+</html>

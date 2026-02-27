@@ -1,6 +1,6 @@
 <!--
   The Brooding Hopster
-  © 2025 Jesse Spencer. All rights reserved.
+  © 2026 Anchor & Arrows, LLC. All rights reserved.
   Do not reproduce or use brand assets without permission.
   thebroodinghopster.com
 -->
@@ -10,108 +10,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light dark" />
   <title>The Brooding Hopster</title>
+
+  <!-- SEO -->
+  <meta name="description" content="The Brooding Hopster — Brewed from the tears of hipsters." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Brooding Hopster" />
+  <meta property="og:description" content="Brewed from the tears of hipsters." />
+  <meta property="og:url" content="https://thebroodinghopster.com" />
+  <meta property="og:image" content="https://thebroodinghopster.com/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Brooding Hopster" />
+  <meta name="twitter:description" content="Brewed from the tears of hipsters." />
+  <meta name="twitter:image" content="https://thebroodinghopster.com/images/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Adobe Fonts: New Spirit SemiBold -->
   <link rel="stylesheet" href="https://use.typekit.net/wun4jdi.css" />
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #F6BB7E;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
 
-    canvas {
-      max-width: 350px;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .site-footer {
-      font-family: "new-spirit", serif;
-      font-weight: 600;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      padding: 1rem 0;
-      font-size: 0.85rem;
-      color: #C65F28;
-      pointer-events: none;
-    }
-  </style>
+  <!-- Apply dark mode before paint to prevent flash -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
 </head>
 
 <body>
-  <!-- Rive canvas lives here -->
-  <canvas id="rive-canvas"></canvas>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" role="switch" aria-checked="false">
+    <span class="toggle-track">
+      <span class="toggle-thumb"></span>
+      <span class="toggle-label toggle-label--light">Light</span>
+      <span class="toggle-label toggle-label--dark">Dark</span>
+    </span>
+  </button>
 
-  <!-- Optional fallback image if animation doesn’t load -->
-  <!-- <img src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" /> -->
+  <!-- Rive canvas lives here -->
+  <canvas id="rive-canvas" role="img" aria-label="The Brooding Hopster — animated illustration"></canvas>
+
+  <!-- Fallback image if Rive animation fails to load -->
+  <img id="rive-fallback" class="fallback-image" src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" />
+
+  <noscript>
+    <img class="fallback-image" style="display:block" src="images/hopster-v2-shading.svg" alt="The Brooding Hopster" />
+  </noscript>
 
   <footer class="site-footer">
-    © 2025 Jesse Spencer
+    © 2026 Anchor & Arrows, LLC
   </footer>
 
-  <!-- Rive Runtime -->
-  <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+  <!-- Rive Runtime (jsDelivr CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.7.0"></script>
 
-  <!-- Rive Init Script -->
-  <script>
-    const canvas = document.getElementById("rive-canvas");
-
-    const dpr = window.devicePixelRatio || 1;
-    const width = 350;
-    const height = 500;
-
-    // Set canvas resolution for high-DPI screens
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-
-    // Initialize Rive with state machine and stable hover behavior
-    const riveInstance = new rive.Rive({
-      src: "assets/hopster-v2.riv",
-      canvas: canvas,
-      autoplay: true,
-      stateMachines: ['HopsterMachine'],
-      onLoad: () => {
-        const inputs = riveInstance.stateMachineInputs('HopsterMachine');
-        const eyesOpenInput = inputs.find(i => i.name === 'EyesOpen');
-
-        let eyesAreOpen = false;
-
-        // Start with eyes closed
-        if (eyesOpenInput && 'value' in eyesOpenInput) {
-          eyesOpenInput.value = false;
-        }
-
-        // Hover to open eyes (only once while inside)
-        canvas.addEventListener('mouseenter', () => {
-          if (eyesOpenInput && 'value' in eyesOpenInput && !eyesAreOpen) {
-            eyesOpenInput.value = true;
-            eyesAreOpen = true;
-          }
-        });
-
-        // Mouse out to close eyes
-        canvas.addEventListener('mouseleave', () => {
-          if (eyesOpenInput && 'value' in eyesOpenInput && eyesAreOpen) {
-            eyesOpenInput.value = false;
-            eyesAreOpen = false;
-          }
-        });
-      }
-    });
-  </script>
+  <!-- Main Script -->
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+{
+  "name": "brooding",
+  "private": true,
+  "scripts": {
+    "dev": "open http://localhost:3000 & npx serve . -p 3000"
+  }
+}
