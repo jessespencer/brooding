@@ -112,6 +112,18 @@ html.dark .toggle-track {
   color: #fff;
 }
 
+.theme-toggle:focus {
+  outline: none;
+}
+
+.theme-toggle:focus-visible .toggle-track {
+  box-shadow: 0 0 0 2px #9B4B1C;
+}
+
+html.dark .theme-toggle:focus-visible .toggle-track {
+  box-shadow: 0 0 0 2px #D1A880;
+}
+
 .theme-toggle:hover .toggle-track {
   background: rgba(198, 95, 40, 0.25);
 }

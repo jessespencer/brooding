@@ -22,7 +22,7 @@ if (typeof rive === "undefined") {
   canvas.style.height = `${baseHeight}px`;
 
   const riveInstance = new rive.Rive({
-    src: "assets/hopster-v2.riv",
+    src: "assets/hopster-v1.riv",
     canvas: canvas,
     autoplay: true,
     stateMachines: ['HopsterMachine'],
