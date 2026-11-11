@@ -24,7 +24,7 @@ All **brand assets** — including, but not limited to:
 
 ## Usage
 
-If you would like to reference or feature **The Brooding Hopster** brand, please [contact me](mailto:jessespencerw@gmail.com) to request written permission.
+If you would like to reference or feature **The Brooding Hopster** brand, please [open an issue](https://github.com/jessespencer/brooding/issues/new) to request written permission.
 
 No license is granted to use, reproduce, modify, or distribute this content except for the limited purpose of viewing this repository.
 
