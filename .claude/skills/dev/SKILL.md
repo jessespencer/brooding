@@ -20,7 +20,7 @@ kill $(lsof -ti:3000) 2>/dev/null; echo "Port 3000 cleared"
 ### Step 2: Start the dev server (background)
 
 ```bash
-cd /Users/jesse.spencer/Code/brooding && npx serve . -p 3000
+cd "$(git rev-parse --show-toplevel)" && npx serve . -p 3000
 ```
 
 Run this in the background. Wait a few seconds then verify it started:
